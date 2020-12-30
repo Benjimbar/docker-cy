@@ -2,16 +2,11 @@
 # https://github.com/bahmutov/cypress-open-from-docker-compose
 version: '3.2'
 services:
-  cypress/included_5.2.0:
-    build: .
-    entrypoint: cypress
-    environment:
-    # pass base url to test pointing at the web application
-      - CYPRESS_baseUrl=http://localhost:8080
-    # share the current folder as volume to avoid copying
-		 
-		working_dir: /e2e
-    volumes:
-			- ./:/e2e
-		command: docker run -it
-			
+ cypress:
+   image: cypress/included:5.0.0
+   entrypoint: cypress
+   # share the current folder as volume to avoid copying
+   working_dir: /e2e
+   command: run
+   volumes:
+     - ./:/e2e
